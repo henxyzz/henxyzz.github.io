@@ -2,11 +2,11 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Selamat Datang di Portal AI dan Downloader</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"> <!-- Mencegah zoom -->
+    <title>Selamat Datang di Portal AI dan Downloader🚀</title>
+    
     <!-- Meta Tags untuk SEO dan Social Media -->
-    <meta name="description" content="Portal AI dan Downloader yang menyediakan berbagai alat dan informasi. Temukan AI, downloader, informasi gempa, dan lebih banyak lagi!">
+    <meta name="description" content="Portal AI💫 dan Downloader yang menyediakan berbagai alat dan informasi. Temukan AI, downloader, informasi gempa, dan lebih banyak lagi!">
     <meta property="og:title" content="Portal AI dan Downloader">
     <meta property="og:description" content="Portal AI dan Downloader yang menyediakan berbagai alat dan informasi. Temukan AI, downloader, informasi gempa, dan lebih banyak lagi!">
     <meta property="og:image" content="https://www.labfisikauinws.com/images/76ai-labfisikauinws.jpeg" />
@@ -23,81 +23,129 @@
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            background: linear-gradient(to bottom, #000000, #434343);
+            color: #ffffff;
+            overflow-y: auto; /* Memungkinkan scroll vertikal */
         }
         header {
-            background: #007BFF;
-            color: white;
+            background: rgba(0, 0, 0, 0.8);
             padding: 20px;
             text-align: center;
+            position: relative;
+            z-index: 2;
         }
         .container {
             max-width: 1200px;
             margin: auto;
             padding: 20px;
+            position: relative;
+            z-index: 2;
+            padding-bottom: 100px; /* Ruang untuk info-box di bawah */
         }
         h1 {
             margin-bottom: 20px;
         }
         .widget {
-            background: white;
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 10px;
             padding: 20px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
             margin-bottom: 20px;
             text-align: center;
         }
-        button {
-            padding: 10px 20px;
-            border: none;
-            background: #28a745;
-            color: white;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-        button:hover {
-            background: #218838;
-        }
-        .links {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-        }
-        .link-item {
-            background: white;
-            border-radius: 10px;
-            padding: 15px;
-            margin: 10px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            flex: 1 1 30%;
-            max-width: 30%;
-            text-align: center;
-        }
-        .link-item a {
-            text-decoration: none;
-            color: #007BFF;
-            font-weight: bold;
-        }
-        .hit-button {
-            background: #ffc107;
-            border: none;
+        .info-box {
+            background: rgba(0, 0, 0, 0.8);
             color: white;
             padding: 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-        .hit-button:hover {
-            background: #e0a800;
-        }
-        .copyright {
             text-align: center;
-            padding: 10px;
+            position: fixed;
+            bottom: 10px; /* Jarak dari bawah */
+            left: 10px; /* Jarak dari sisi kiri */
+            width: 200px; /* Lebar box */
+            z-index: 3;
+            opacity: 1; /* Opasitas awal */
+            transition: opacity 4s ease-in-out; /* Animasi transisi untuk efek menghilang */
+        }
+        .leaderboard {
             margin-top: 20px;
-            background: #343a40;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            max-height: 300px; /* Tinggi maksimum untuk scroll */
+            overflow-y: auto; /* Scroll vertikal */
+            opacity: 0.8; /* Transparansi awal */
+            transition: opacity 0.3s; /* Transisi untuk efek transparansi */
+            padding-top: 30px; /* Ruang untuk judul leaderboard */
+            position: relative; /* Memastikan leaderboard tidak keluar dari container */
+            z-index: 1; /* Menempatkan leaderboard di bawah judul */
+            text-align: center; /* Mengatur teks ke tengah */
+        }
+        .leaderboard-title {
+            position: sticky; /* Membuat judul tetap di atas saat scroll */
+            top: 0; /* Jarak dari atas */
+            background: rgba(255, 255, 255, 0.1); /* Latar belakang transparan */
+            padding: 10px; /* Padding untuk judul */
+            text-align: center;
+            z-index: 2; /* Agar judul tetap di atas */
+        }
+        .leaderboard ul {
+            list-style: none;
+            padding: 0;
+            margin: 0; /* Menghapus margin untuk daftar */
+        }
+        .leaderboard li {
+            margin: 5px 0;
+            padding: 5px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            display: flex; /* Menggunakan flexbox untuk pusatkan konten */
+            justify-content: space-between; /* Pusatkan konten secara horizontal */
+            align-items: center; /* Pusatkan konten secara vertikal */
+            padding: 10px; /* Padding untuk item */
+        }
+        /* Tombol Menu */
+        .menu-button {
+            background-color: #007BFF;
             color: white;
-            font-size: 0.9em;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 15px; /* Ukuran tombol lebih kecil */
+            margin: 5px 0;
+            cursor: pointer;
+            font-size: 0.9em; /* Ukuran font lebih kecil */
+            transition: transform 0.2s, background-color 0.3s;
+        }
+        .menu-button:hover {
+            background-color: #0056b3;
+        }
+        .menu-button:active {
+            transform: scale(0.95);
+            background-color: #004085;
+        }
+
+        /* Efek bintang */
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% {
+                opacity: 0.5;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* Menentukan posisi bintang agar memenuhi seluruh halaman */
+        .star {
+            width: 2px; /* Ukuran bintang */
+            height: 2px; /* Ukuran bintang */
+            left: calc(Math.random() * 100vw); /* Posisi acak dari kiri */
+            top: calc(Math.random() * 100vh); /* Posisi acak dari atas */
         }
     </style>
 </head>
@@ -107,64 +155,145 @@
     </header>
     <div class="container">
         <div class="widget">
-            <h2>Jumlah Pengunjung: <span id="visitorCount">0</span></h2>
-            <button onclick="incrementVisitorCount()">Tampilkan Pengunjung</button>
+            <h2>Jam: <span id="currentTime">00:00:00</span></h2> <!-- Menampilkan jam lokal -->
         </div>
-        <div class="widget">
-            <h2>Paling Hit</h2>
-            <button class="hit-button" onclick="alert('Tombol Paling Hit ditekan!')">Paling Hit</button>
+
+        <div class="leaderboard">
+            <div class="leaderboard-title">
+                <h3>Top🔥</h3>
+            </div>
+            <ul id="leaderboardList">
+                <!-- Daftar akan diisi secara dinamis -->
+            </ul>
         </div>
+
         <h2>Menu</h2>
         <div class="links">
             <div class="link-item">
                 <h3>AI</h3>
-                <a href="Ai/magicai.html">Magic AI</a><br>
-                <a href="Ai/rbai.html">RB AI</a>
+                <button onclick="window.location.href='Ai/magicai.html'; incrementButtonClick('Magic AI');" class="menu-button">Magic AI</button>
+                <button onclick="window.location.href='Ai/rbai.html'; incrementButtonClick('RB AI');" class="menu-button">RB AI</button>
+                <button onclick="window.location.href='Ai/silumanai.html'; incrementButtonClick('Siluman AI');" class="menu-button">Siluman AI</button>
             </div>
             <div class="link-item">
                 <h3>Downloader</h3>
-                <a href="Downloader/ccdownloader.html">CC Downloader</a><br>
-                <a href="Downloader/fbdownloader.html">FB Downloader</a><br>
-                <a href="Downloader/igdownloader.html">IG Downloader</a><br>
-                <a href="Downloader/mediafiredownloader.html">Mediafire Downloader</a><br>
-                <a href="Downloader/pindownloader.html">Pin Downloader</a><br>
-                <a href="Downloader/spotifydownloader.html">Spotify Downloader</a><br>
-                <a href="Downloader/ttdownloader.html">TT Downloader</a><br>
-                <a href="Downloader/videydownloader.html">Video Downloader</a><br>
-                <a href="Downloader/ytmp3downloader.html">YT MP3 Downloader</a><br>
-                <a href="Downloader/ytmp4downloader.html">YT MP4 Downloader</a>
+                <button onclick="window.location.href='Downloader/ccdownloader.html'; incrementButtonClick('CC Downloader');" class="menu-button">CC Downloader</button>
+                <button onclick="window.location.href='Downloader/fbdownloader.html'; incrementButtonClick('FB Downloader');" class="menu-button">FB Downloader</button>
+                <button onclick="window.location.href='Downloader/igdownloader.html'; incrementButtonClick('IG Downloader');" class="menu-button">IG Downloader</button>
+                <button onclick="window.location.href='Downloader/mediafiredownloader.html'; incrementButtonClick('Mediafire Downloader');" class="menu-button">Mediafire Downloader</button>
+                <button onclick="window.location.href='Downloader/pindownloader.html'; incrementButtonClick('Pin Downloader');" class="menu-button">Pin Downloader</button>
+                <button onclick="window.location.href='Downloader/spotifydownloader.html'; incrementButtonClick('Spotify Downloader');" class="menu-button">Spotify Downloader</button>
+                <button onclick="window.location.href='Downloader/ttdownloader.html'; incrementButtonClick('TT Downloader');" class="menu-button">TT Downloader</button>
+                <button onclick="window.location.href='Downloader/videodownloader.html'; incrementButtonClick('Video Downloader');" class="menu-button">Video Downloader</button>
+                <button onclick="window.location.href='Downloader/ytmp3downloader.html'; incrementButtonClick('YT MP3 Downloader');" class="menu-button">YT MP3 Downloader</button>
+                <button onclick="window.location.href='Downloader/ytmp4downloader.html'; incrementButtonClick('YT MP4 Downloader');" class="menu-button">YT MP4 Downloader</button>
             </div>
             <div class="link-item">
                 <h3>Information</h3>
-                <a href="Information/gempainfo.html">Info Gempa</a><br>
-                <a href="Information/liburinfo.html">Info Libur</a>
+                <button onclick="window.location.href='Information/gempainfo.html'; incrementButtonClick('Info Gempa');" class="menu-button">Info Gempa</button>
+                <button onclick="window.location.href='Information/liburinfo.html'; incrementButtonClick('Info Libur');" class="menu-button">Info Libur</button>
             </div>
             <div class="link-item">
                 <h3>Search</h3>
-                <a href="Search/cuacasearch.html">Cuaca Search</a><br>
-                <a href="Search/hpdetail.html">HP Detail</a><br>
-                <a href="Search/hpsearch.html">HP Search</a><br>
-                <a href="Search/liriksearch.html">Lirik Search</a><br>
-                <a href="Search/pinsearch.html">Pin Search</a><br>
-                <a href="Search/spotifysearch.html">Spotify Search</a><br>
-                <a href="Search/stickersearch.html">Sticker Search</a><br>
-                <a href="Search/ttsearch.html">TT Search</a><br>
-                <a href="Search/ytsearch.html">YT Search</a>
+                <button onclick="window.location.href='Search/cuacasearch.html'; incrementButtonClick('Cuaca Search');" class="menu-button">Cuaca Search</button>
+                <button onclick="window.location.href='Search/hpdetail.html'; incrementButtonClick('HP Detail');" class="menu-button">HP Detail</button>
+                <button onclick="window.location.href='Search/hpsearch.html'; incrementButtonClick('HP Search');" class="menu-button">HP Search</button>
+                <button onclick="window.location.href='Search/liriksearch.html'; incrementButtonClick('Lirik Search');" class="menu-button">Lirik Search</button>
+                <button onclick="window.location.href='Search/pinsearch.html'; incrementButtonClick('Pin Search');" class="menu-button">Pin Search</button>
+                <button onclick="window.location.href='Search/spotifysearch.html'; incrementButtonClick('Spotify Search');" class="menu-button">Spotify Search</button>
+                <button onclick="window.location.href='Search/stickersearch.html'; incrementButtonClick('Sticker Search');" class="menu-button">Sticker Search</button>
+                <button onclick="window.location.href='Search/ttsearch.html'; incrementButtonClick('TT Search');" class="menu-button">TT Search</button>
+                <button onclick="window.location.href='Search/ytsearch.html'; incrementButtonClick('YT Search');" class="menu-button">YT Search</button>
             </div>
         </div>
-    </div>
 
-    <div class="copyright">
-        &copy; 2024 Copyright by Henzx. All Rights Reserved.
-    </div>
+        <div class="copyright">
+            &copy; 2024 Copyright by Henzx. All Rights Reserved.
+        </div>
 
-    <script>
-        let visitorCount = 0;
+        <script>
+            let buttonClicks = {};
 
-        function incrementVisitorCount() {
-            visitorCount++;
-            document.getElementById('visitorCount').textContent = visitorCount;
-        }
-    </script>
-</body>
+            // Restore clicks from localStorage
+            function restoreClicks() {
+                const storedClicks = localStorage.getItem('buttonClicks');
+                if (storedClicks) {
+                    buttonClicks = JSON.parse(storedClicks);
+                }
+                updateLeaderboard();
+            }
+
+            function incrementButtonClick(buttonName) {
+                if (buttonClicks[buttonName]) {
+                    buttonClicks[buttonName]++;
+                } else {
+                    buttonClicks[buttonName] = 1;
+                }
+                localStorage.setItem('buttonClicks', JSON.stringify(buttonClicks)); // Simpan ke localStorage
+                updateLeaderboard();
+            }
+
+            function updateLeaderboard() {
+                const leaderboardList = document.getElementById('leaderboardList');
+                leaderboardList.innerHTML = ''; // Kosongkan daftar sebelum memperbarui
+                const sortedButtons = Object.entries(buttonClicks).sort((a, b) => b[1] - a[1]);
+                sortedButtons.slice(0, 10).forEach(([button, count], index) => { // Menampilkan 10 tombol teratas
+                    const li = document.createElement('li');
+                    li.textContent = `${index + 1}. ${button} - ${count}`; // Format: "1. Nama Tombol - Jumlah Klik"
+                    leaderboardList.appendChild(li);
+                });
+            }
+
+            // Menampilkan waktu lokal
+            function updateTime() {
+                const now = new Date();
+                const hours = String(now.getHours()).padStart(2, '0');
+                const minutes = String(now.getMinutes()).padStart(2, '0');
+                const seconds = String(now.getSeconds()).padStart(2, '0');
+                document.getElementById('currentTime').textContent = `${hours}:${minutes}:${seconds}`;
+            }
+
+            setInterval(updateTime, 1000); // Memperbarui setiap detik
+            updateTime(); // Memanggil fungsi untuk pertama kali
+
+            // Menambahkan efek bintang
+            function createStars() {
+                for (let i = 0; i < 100; i++) {
+                    const star = document.createElement('div');
+                    star.className = 'star';
+                    const size = Math.random() * 3 + 1; // Ukuran bintang antara 1px dan 3px
+                    star.style.width = `${size}px`;
+                    star.style.height = `${size}px`;
+                    star.style.left = `${Math.random() * 100}vw`; // Posisi acak dari kiri
+                    star.style.top = `${Math.random() * 100}vh`; // Posisi acak dari atas
+                    star.style.animationDuration = `${Math.random() * 2 + 1}s`; // Durasi berkedip
+                    document.body.appendChild(star);
+                }
+            }
+
+            createStars();
+            restoreClicks(); // Restore clicks from localStorage saat halaman dimuat
+
+            // Efek transparansi leaderboard saat di-scroll
+            window.onscroll = function() {
+                const leaderboard = document.getElementById("leaderboard");
+                const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+
+                if (scrollTop > 50) {
+                    leaderboard.style.opacity = "1"; // Menyala ketika di-scroll ke atas
+                } else {
+                    leaderboard.style.opacity = "0.8"; // Transparan saat tidak di-scroll
+                }
+            };
+
+            // Menghilangkan info-box secara transparan setelah 4 detik
+            setTimeout(() => {
+                const infoBox = document.querySelector('.info-box');
+                infoBox.style.opacity = "0"; // Mengubah opasitas menjadi 0
+                setTimeout(() => {
+                    infoBox.style.display = "none"; // Menghapus elemen setelah animasi selesai
+                }, 4000); // Waktu yang sama dengan durasi transisi
+            }, 4000); // Menunggu 4 detik sebelum mulai menghilang
+        </script>
+    </body>
 </html>

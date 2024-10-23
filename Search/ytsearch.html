@@ -14,14 +14,14 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #1e1e1e;
-            color: #fff;
+            background-color: #1e1e1e; /* Warna latar belakang gelap */
+            color: #fff; /* Warna teks putih */
             margin: 0;
             padding: 20px;
         }
         h1 {
             text-align: center;
-            color: #4caf50;
+            color: #4caf50; /* Warna judul */
         }
         .video-container {
             display: flex;
@@ -29,7 +29,7 @@
             justify-content: space-around;
         }
         .video-card {
-            background-color: #2c2c2c;
+            background-color: #2c2c2c; /* Warna latar belakang kartu video */
             border-radius: 8px;
             overflow: hidden;
             margin: 10px;
@@ -52,10 +52,10 @@
         }
         .video-info p {
             font-size: 0.9em;
-            color: #bbb;
+            color: #bbb; /* Warna teks deskripsi */
         }
         .video-info a {
-            color: #4caf50;
+            color: #4caf50; /* Warna link */
             text-decoration: none;
         }
         .watermark {
@@ -100,7 +100,7 @@
                         <p>Dari: <a href="${video.author.url}" target="_blank">${video.author.name}</a></p>
                         <p><strong>Durasi:</strong> ${video.timestamp}</p>
                         <p><strong>Ditonton:</strong> ${video.views} kali</p>
-                        <a href="${video.url}" target="_blank">Tonton Sekarang</a>
+                        <a href="Downloader/ytmp4downloader.html?url=${encodeURIComponent(video.url)}" target="_blank">Unduh</a>
                     </div>
                 `;
                 videoContainer.appendChild(card);

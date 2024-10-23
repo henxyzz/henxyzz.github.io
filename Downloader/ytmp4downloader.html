@@ -11,7 +11,7 @@
     <meta name="author" content="Agat">
     <meta property="og:title" content="YouTube MP4 Downloader" />
     <meta property="og:description" content="Unduh video YouTube dalam format MP4 dengan kualitas pilihan." />
-    <meta property="og:image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtfC0qkf6p8b2mfEv0QtmDx1VhYcTYBlHjkA&s" /> <!-- Ganti URL dengan thumbnail yang diinginkan -->
+    <meta property="og:image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtfC0qkf6p8b2mfEv0QtmDx1VhYcTYBlHjkA&s" />
     <meta property="og:url" content="https://hexz1.github.io" />
     <meta name="twitter:card" content="summary_large_image" />
     
@@ -20,7 +20,7 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #0d0d0d; /* Latar belakang gelap */
+            background-color: #1e1e1e; /* Latar belakang gelap */
             color: #00ff00; /* Teks hijau cerah */
             overflow-x: hidden;
         }
@@ -65,11 +65,14 @@
             color: #0d0d0d; /* Teks tombol hitam */
             font-size: 1.1em;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, transform 0.1s; /* Efek transisi */
             margin-top: 10px;
         }
         button:hover {
             background-color: #33cc33; /* Warna tombol saat hover */
+        }
+        button:active {
+            transform: scale(0.95); /* Efek saat tombol ditekan */
         }
         .video-container {
             display: flex;
@@ -89,23 +92,6 @@
         .copyright {
             font-size: 0.8em;
             margin-top: 10px;
-        }
-        @keyframes circuit {
-            from { background-position: 0 0; }
-            to { background-position: 100% 0; }
-        }
-        body::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('https://cdn.pixabay.com/photo/2014/04/03/10/15/circuit-312127_1280.png'); /* Gambar jalur chip */
-            background-size: 200px 200px;
-            opacity: 0.1; /* Opasitas gambar latar */
-            animation: circuit 10s linear infinite; /* Animasi jalur chip */
-            pointer-events: none; /* Nonaktifkan interaksi */
         }
     </style>
 </head>
@@ -147,14 +133,14 @@
                 }
 
                 const data = await response.json();
-                displayVideo(data.data[quality]); // Menampilkan video dari respons API berdasarkan kualitas yang dipilih
+                displayVideo(data.data[quality], quality); // Menampilkan video dari respons API berdasarkan kualitas yang dipilih
             } catch (error) {
                 console.error('Terjadi kesalahan:', error);
                 alert('Tidak ada video ditemukan atau URL tidak valid.');
             }
         }
 
-        function displayVideo(media) {
+        function displayVideo(media, quality) {
             const videoContainer = document.getElementById('videoContainer');
             videoContainer.innerHTML = ''; // Kosongkan kontainer sebelum menampilkan video baru
 
@@ -165,7 +151,7 @@
 
             // Membuat elemen video dan tombol download
             const videoElement = `
-                <a href="${media.response.url}" download="${media.response.filename}" style="color: #00ff00;">Unduh ${media.filename}</a>
+                <a href="${media.response.url}" download="${media.response.filename}" style="color: #00ff00;">Unduh ${media.filename || quality} (${quality}p)</a>
             `;
             videoContainer.innerHTML = videoElement;
         }
