@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
+    <title>Magic AI Image Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #0d0d0d;
+            color: #00ff00;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .input-container {
+            display: flex;
+            padding: 10px;
+        }
+        input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            background-color: #1a1a1a;
+            color: #00ff00;
+            font-size: 1em;
+            outline: none;
+        }
+        button {
+            padding: 10px;
+            background-color: #00ff00;
+            border: none;
+            border-radius: 5px;
+            color: #0d0d0d;
+            font-size: 1em;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        .result-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .result-container img {
+            max-width: 300px;
+            border: 2px solid #00ff00;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="input-container">
+        <input type="text" id="message" placeholder="Masukkan deskripsi gambar...">
+        <button onclick="generateImage()">Generate</button>
+    </div>
+
+    <div class="result-container" id="resultContainer">
+        <!-- Gambar dan tombol download akan muncul di sini -->
+    </div>
+
+    <script>
+        async function generateImage() {
+            const message = document.getElementById('message').value;
+            if (!message.trim()) return;
+
+            const url = `https://api.agatz.xyz/api/magicstudio?message=${encodeURIComponent(message)}`;
+
+            try {
+                const response = await fetch(url);
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                const data = await response.json();
+                const imageUrl = JSON.parse(data.data).url;
+
+                displayImage(imageUrl);
+            } catch (error) {
+                console.error('Terjadi kesalahan:', error);
+            }
+        }
+
+        function displayImage(imageUrl) {
+            const resultContainer = document.getElementById('resultContainer');
+            resultContainer.innerHTML = ''; // Clear previous result
+
+            // Menampilkan gambar
+            const img = document.createElement('img');
+            img.src = imageUrl;
+            resultContainer.appendChild(img);
+
+            // Menambahkan tombol download
+            const downloadButton = document.createElement('button');
+            downloadButton.innerText = 'Download Image';
+            downloadButton.onclick = function() {
+                downloadImage(imageUrl);
+            };
+            resultContainer.appendChild(downloadButton);
+        }
+
+        function downloadImage(imageUrl) {
+            const link = document.createElement('a');
+            link.href = imageUrl;
+            link.download = 'generated_image.png'; // Nama default untuk gambar
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Pencarian stiker lucu dan menarik.">
+    <meta property="og:title" content="Pencarian Stiker">
+    <meta property="og:description" content="Temukan dan unduh stiker lucu untuk digunakan.">
+    <meta property="og:image" content="thumbnail_image_url.jpg"> <!-- Ganti dengan URL thumbnail Anda -->
+    <meta property="og:url" content="link_to_your_website"> <!-- Ganti dengan URL website Anda -->
+    <title>Pencarian Stiker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        .search-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            width: 70%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            background: #28a745;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        button:hover {
+            background: #218838;
+        }
+        .sticker-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .sticker-card {
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            width: 120px;
+            text-align: center;
+        }
+        .sticker-card img {
+            width: 100%;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Pencarian Stiker</h1>
+        <div class="search-container">
+            <input type="text" id="searchQuery" placeholder="Masukkan kata kunci...">
+            <button onclick="fetchStickers()">Cari</button>
+        </div>
+        <div id="stickerContainer" class="sticker-container"></div>
+        <p style="text-align: center;">All rights reserved.</p>
+    </div>
+
+    <script>
+        async function fetchStickers() {
+            const query = document.getElementById('searchQuery').value;
+            const response = await fetch(`https://api.agatz.xyz/api/sticker?message=${query}`);
+            const result = await response.json();
+            displayStickers(result.data.sticker_url, result.data.title);
+        }
+
+        function displayStickers(stickerUrls, title) {
+            const stickerContainer = document.getElementById('stickerContainer');
+            stickerContainer.innerHTML = ''; // Kosongkan kontainer hasil
+
+            stickerUrls.forEach(url => {
+                const stickerCard = document.createElement('div');
+                stickerCard.className = 'sticker-card';
+
+                const img = document.createElement('img');
+                img.src = url;
+                img.alt = title;
+
+                const downloadButton = document.createElement('button');
+                downloadButton.textContent = 'Unduh';
+                downloadButton.onclick = () => downloadSticker(url);
+
+                stickerCard.appendChild(img);
+                stickerCard.appendChild(downloadButton);
+                stickerContainer.appendChild(stickerCard);
+            });
+        }
+
+        function downloadSticker(url) {
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = ''; // Nama file default
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+    </script>
+</body>
+</html>

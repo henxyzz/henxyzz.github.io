@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cari Lagu di Spotify</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        .search-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            width: 70%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            background: #007BFF;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .track-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .track-card {
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .track-card a {
+            display: block;
+            margin-top: 5px;
+            text-decoration: none;
+            color: #007BFF;
+        }
+        .track-card a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Cari Lagu di Spotify</h1>
+        <div class="search-container">
+            <input type="text" id="searchQuery" placeholder="Masukkan nama lagu atau artis...">
+            <button onclick="fetchTracks()">Cari</button>
+        </div>
+        <div id="trackContainer" class="track-container"></div>
+        <p style="text-align: center;">All rights reserved.</p>
+    </div>
+
+    <script>
+        async function fetchTracks() {
+            const query = document.getElementById('searchQuery').value;
+            const response = await fetch(`https://api.agatz.xyz/api/spotify?message=${query}`);
+            const result = await response.json();
+            displayTracks(result.data);
+        }
+
+        function displayTracks(tracks) {
+            const trackContainer = document.getElementById('trackContainer');
+            trackContainer.innerHTML = ''; // Kosongkan kontainer hasil
+
+            tracks.forEach(track => {
+                const trackCard = document.createElement('div');
+                trackCard.className = 'track-card';
+
+                const title = document.createElement('h3');
+                title.textContent = `${track.trackName} - ${track.artistName}`;
+
+                const album = document.createElement('p');
+                album.textContent = `Album: ${track.albumName}`;
+
+                const duration = document.createElement('p');
+                duration.textContent = `Durasi: ${track.duration}`;
+
+                const link = document.createElement('a');
+                link.href = track.externalUrl;
+                link.textContent = 'Dengar di Spotify';
+                link.target = '_blank'; // Membuka link di tab baru
+
+                const previewButton = document.createElement('button');
+                previewButton.textContent = 'Prabisa';
+                previewButton.onclick = () => {
+                    const audio = new Audio(track.previewUrl);
+                    audio.play();
+                };
+
+                trackCard.appendChild(title);
+                trackCard.appendChild(album);
+                trackCard.appendChild(duration);
+                trackCard.appendChild(link);
+                if (track.previewUrl) {
+                    trackCard.appendChild(previewButton);
+                }
+                trackContainer.appendChild(trackCard);
+            });
+        }
+    </script>
+</body>
+</html>
