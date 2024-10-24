@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"> <!-- Mencegah zoom -->
     <title>Siluman AI Chat😝</title>
+    
+    <!-- Meta tags untuk media sosial -->
+    <meta property="og:title" content="Siluman AI Chat" />
+    <meta property="og:description" content="Selamat datang di Siluman AI Chat, tempat Anda bisa berbicara dengan AI!" />
+    <meta property="og:image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScMdYH9KCbR3JtEi7G7W0z72Yb7xypJfGPtw&s" />
+    <meta property="og:url" content="https://henxyzz.github.io/Ai/silumanai.html" />
+    <meta property="og:type" content="website" />
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -11,11 +19,12 @@
             color: white;
             margin: 0;
             padding: 0;
+            height: 100vh; /* Memenuhi tinggi layar */
+            overflow: hidden; /* Mencegah scrollbar muncul */
         }
         #chat-container {
-            width: 400px;
-            height: 600px;
-            margin: auto;
+            width: 100%; /* Memenuhi lebar layar */
+            height: 100%; /* Memenuhi tinggi layar */
             display: flex;
             flex-direction: column;
             border: 1px solid #444;
@@ -34,7 +43,7 @@
         #messages {
             flex: 1;
             padding: 10px;
-            overflow-y: auto;
+            overflow-y: auto; /* Hanya bagian chat yang bisa di-scroll */
             display: flex;
             flex-direction: column;
         }
@@ -43,6 +52,7 @@
             padding: 10px;
             border-radius: 10px;
             max-width: 80%;
+            position: relative;
             animation: blink 1s infinite; /* Efek blink */
         }
         .user-message {
@@ -55,7 +65,18 @@
             background-color: #444;
             color: white;
         }
+        .timestamp {
+            font-size: 0.7em;
+            color: #bbb;
+            position: absolute;
+            bottom: -15px; /* Posisi timestamp */
+            right: 10px;
+        }
         #input-container {
+            position: fixed; /* Mengunci posisi input container */
+            bottom: 0;
+            left: 0;
+            width: 100%;
             display: flex;
             padding: 10px;
             border-top: 1px solid #444;
@@ -92,17 +113,35 @@
                 opacity: 1;
             }
         }
+        /* Efek bintang */
+        .star {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background-color: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+        @keyframes twinkle {
+            0%, 100% {
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
     </style>
 </head>
 <body>
     <div id="chat-container">
-        <div id="footer">Siluman AI</div> <!-- Footer ditambahkan di sini -->
+        <div id="footer">Siluman AI🗿</div> <!-- Footer ditambahkan di sini -->
         <div id="messages"></div>
         <div id="input-container">
             <input type="text" id="message-input" placeholder="Ketik pesan...">
             <button id="send-button">Kirim</button>
             <button id="clear-chat">Clear Chat</button>
         </div>
+        <!-- Bintang berkelap-kelip -->
     </div>
 
     <script>
@@ -124,7 +163,7 @@
             const userMessage = messageInput.value;
             if (!userMessage) return;
 
-            // Tampilkan pesan pengguna
+            // Tampilkan pesan pengguna dengan timestamp
             displayMessage(userMessage, "user");
 
             // Mengosongkan input
@@ -151,6 +190,14 @@
             messageElement.classList.add("message");
             messageElement.classList.add(`${sender}-message`);
             messageElement.textContent = message;
+
+            // Menambahkan timestamp
+            const timestamp = new Date().toLocaleTimeString();
+            const timestampElement = document.createElement("span");
+            timestampElement.classList.add("timestamp");
+            timestampElement.textContent = timestamp;
+            messageElement.appendChild(timestampElement);
+
             messagesContainer.appendChild(messageElement);
 
             // Simpan pesan ke localStorage
@@ -164,6 +211,23 @@
             const messages = chatHistory ? JSON.parse(chatHistory) : [];
             messages.push({ text: message, sender });
             localStorage.setItem('chatHistory', JSON.stringify(messages));
+        }
+
+        // Fungsi untuk menambahkan bintang berkelap-kelip secara acak
+        function createStar() {
+            const star = document.createElement("div");
+            star.classList.add("star");
+            // Menentukan posisi acak untuk bintang
+            const x = Math.random() * (window.innerWidth - 10); // Mengurangi 10 untuk menghindari overflow
+            const y = Math.random() * (window.innerHeight - 10); // Mengurangi 10 untuk menghindari overflow
+            star.style.left = `${x}px`;
+            star.style.top = `${y}px`;
+            document.getElementById("chat-container").appendChild(star);
+        }
+
+        // Membuat 10 bintang secara acak saat halaman dimuat
+        for (let i = 0; i < 10; i++) {
+            createStar();
         }
 
         loadChat(); // Load chat saat halaman dimuat
