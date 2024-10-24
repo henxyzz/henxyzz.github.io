@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Cari video menarik di YouTube dengan pencarian mudah. Temukan video terbaru dan terpopuler.">
-    <meta property="og:title" content="YT Search - Cari Video YouTube🔍">
+    <meta property="og:title" content="YT Search - Cari Video YouTube">
     <meta property="og:description" content="Temukan video menarik dan terbaru di YouTube.">
     <meta property="og:image" content="https://www.wearediagram.com/hubfs/YouTube_Search.jpg"> <!-- Ganti dengan URL thumbnail default -->
-    <meta property="og:url" content="https://henxyzz.github.io/Search/ytsearch.html"> <!-- Ganti dengan URL halaman Anda -->
+    <meta property="og:url" content="henxyzz.github.io/Search/ytsearch.html"> <!-- Ganti dengan URL halaman Anda -->
     <meta property="og:type" content="website">
     <title>YT Search</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -135,7 +135,7 @@
     <h1>Pencarian Video YouTube</h1>
     <div class="search-container">
         <input type="text" id="searchQuery" placeholder="Masukan kata kunci" />
-        <button id="searchButton">Cari</button>
+        <button id="searchButton">🔍</button>
     </div>
     <div class="video-container" id="videoResults"></div>
 
@@ -169,7 +169,7 @@
                         <p>Dari: <a href="${video.author.url}" target="_blank">${video.author.name}</a></p>
                         <p><strong>Durasi:</strong> ${video.timestamp}</p>
                         <p><strong>Ditonton:</strong> ${video.views} kali</p>
-                        <button onclick="downloadVideo('${video.url}')">Unduh</button>
+                        <button onclick="downloadVideo('${video.url}', '${video.id}')">Unduh</button>
                         <div class="quality-selection" id="quality-${video.id}">
                             <strong>Pilih Kualitas:</strong>
                             <select onchange="startDownload('${video.url}', this.value)">
@@ -187,8 +187,8 @@
             });
         }
 
-        function downloadVideo(url) {
-            const qualitySelection = document.getElementById(`quality-${url}`);
+        function downloadVideo(url, id) {
+            const qualitySelection = document.getElementById(`quality-${id}`);
             qualitySelection.style.display = 'block';
         }
 
@@ -196,8 +196,12 @@
             if (quality) {
                 const response = await fetch(apiUrlDownload + encodeURIComponent(url));
                 const data = await response.json();
-                const downloadUrl = data.data[quality].response.url;
-                window.open(downloadUrl, '_blank');
+                if (data.data[quality]) {
+                    const downloadUrl = data.data[quality].response.url;
+                    window.open(downloadUrl, '_blank');
+                } else {
+                    alert("Kualitas yang dipilih tidak tersedia.");
+                }
             } else {
                 alert("Silakan pilih kualitas sebelum mengunduh.");
             }
@@ -213,4 +217,4 @@
         });
     </script>
 </body>
-    </html>
+</html>

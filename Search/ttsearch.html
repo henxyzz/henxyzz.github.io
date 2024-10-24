@@ -2,78 +2,80 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Pencarian stiker lucu dan menarik.">
-    <meta property="og:title" content="Pencarian Stiker">
-    <meta property="og:description" content="Temukan dan unduh stiker lucu untuk digunakan.">
-    <meta property="og:image" content="thumbnail_image_url.jpg"> <!-- Ganti dengan URL thumbnail Anda -->
-    <meta property="og:url" content="link_to_your_website"> <!-- Ganti dengan URL website Anda -->
-    <title>Pencarian Stiker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="description" content="Cari video TikTok terbaru dan unduh dengan mudah. Temukan video viral, musik, dan banyak lagi.">
+    <meta name="keywords" content="TikTok, video downloader, unduh video TikTok">
+    <meta name="author" content="Henhen">
+    <meta property="og:title" content="TikTok Video Downloader" />
+    <meta property="og:description" content="Cari video TikTok terbaru dan unduh dengan mudah." />
+    <meta property="og:image" content="https://example.com/tiktok-thumbnail.jpg" />
+    <meta property="og:url" content="https://hexz1.github.io" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <title>Pencarian Video TikTok</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #121212; /* Warna latar belakang gelap */
-            color: #ffffff; /* Warna teks putih */
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: black;
+            color: white;
+            overflow-x: hidden;
             position: relative; /* Untuk mengatur posisi bintang */
         }
-        .container {
-            max-width: 800px;
-            margin: auto;
-            padding: 20px;
-            background: #1e1e1e; /* Warna latar belakang kontainer */
-            box-shadow: 0 0 10px rgba(0,0,0,0.5);
-            border-radius: 8px; /* Menambahkan radius sudut */
-        }
+
         h1 {
             text-align: center;
+            margin-top: 20px;
         }
-        .search-container {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-            position: relative; /* Untuk mengatur bintang dalam panel ini */
+
+        #search-container {
+            text-align: center;
+            margin: 20px;
         }
-        input[type="text"] {
-            width: 70%;
+
+        #search-box {
+            width: 80%;
             padding: 10px;
-            border: 1px solid #444; /* Warna border gelap */
+            font-size: 16px;
             border-radius: 5px;
-            background-color: #333; /* Warna latar belakang input */
-            color: white; /* Warna teks input */
-        }
-        button {
-            padding: 10px 20px;
             border: none;
-            background: #28a745; /* Warna tombol */
+            margin-bottom: 20px;
+        }
+
+        #search-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #1DA1F2;
             color: white;
+            border: none;
             border-radius: 5px;
             cursor: pointer;
-            margin-left: 10px;
-            transition: background 0.3s; /* Efek transisi */
+            transition: transform 0.2s; /* Animasi saat tombol ditekan */
         }
-        button:hover {
-            background: #218838; /* Warna tombol saat hover */
+
+        #search-button:active {
+            transform: scale(0.95); /* Efek mengecil saat ditekan */
         }
-        .sticker-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
-        }
-        .sticker-card {
-            background: #2c2c2c; /* Warna latar belakang kartu stiker */
-            border: 1px solid #444; /* Warna border gelap */
-            border-radius: 5px;
+
+        .video {
+            margin: 20px auto;
             padding: 10px;
-            width: 120px;
-            text-align: center;
+            background-color: #333;
+            border-radius: 8px;
+            width: 80%;
+            box-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
+            position: relative; /* Posisi relatif untuk video */
+            z-index: 1; /* Agar video di atas bintang */
         }
-        .sticker-card img {
-            width: 100%;
-            border-radius: 5px;
+
+        .video p {
+            margin: 5px 0;
         }
+
+        #videos {
+            margin-bottom: 60px;
+        }
+
         /* Bintang berkedip */
         .star {
             position: absolute;
@@ -82,7 +84,7 @@
             background-color: white;
             border-radius: 50%;
             animation: blink 2s infinite ease-in-out;
-            z-index: 0; /* Bintang selalu di bawah elemen lain */
+            z-index: 0; /* Bintang selalu di bawah video */
         }
 
         @keyframes blink {
@@ -93,67 +95,80 @@
                 opacity: 1;
             }
         }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #111;
+            color: white;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Pencarian Stiker</h1>
-        <div class="search-container">
-            <input type="text" id="searchQuery" placeholder="Masukkan kata kunci...">
-            <button onclick="fetchStickers()">Cari</button>
-            <div id="star-container" class="star-container"></div> <!-- Kontainer untuk bintang -->
-        </div>
-        <div id="stickerContainer" class="sticker-container"></div>
-        <p style="text-align: center;">All rights reserved.</p>
+    <h1>Pencarian Video TikTok</h1>
+
+    <div id="search-container">
+        <input type="text" id="search-box" placeholder="Masukkan kata kunci pencarian TikTok...">
+        <button id="search-button" onclick="searchTikTok()">Cari</button>
     </div>
 
+    <div id="videos"></div>
+
+    <footer>
+        &copy; 2024 TikTok Video Downloader by Henhen
+    </footer>
+
     <script>
-        async function fetchStickers() {
-            const query = document.getElementById('searchQuery').value;
-            const response = await fetch(`https://api.agatz.xyz/api/sticker?message=${query}`);
-            const result = await response.json();
-            displayStickers(result.data.sticker_url, result.data.title);
+        async function searchTikTok() {
+            const query = document.getElementById('search-box').value;
+            if (!query) {
+                alert('Masukkan kata kunci terlebih dahulu!');
+                return;
+            }
+
+            // Animasi pencarian
+            document.getElementById('search-button').innerText = 'Mencari...'; // Mengubah teks tombol
+            document.getElementById('search-button').disabled = true; // Menonaktifkan tombol selama pencarian
+
+            const response = await fetch(`https://api.agatz.xyz/api/tiktoksearch?message=${query}`);
+            const data = await response.json();
+
+            // Mengembalikan tampilan tombol ke semula
+            document.getElementById('search-button').innerText = 'Cari'; // Mengubah teks kembali
+            document.getElementById('search-button').disabled = false; // Mengaktifkan tombol kembali
+
+            if (data.status === 200) {
+                const videosContainer = document.getElementById('videos');
+                videosContainer.innerHTML = '';  // Hapus hasil sebelumnya
+
+                // Tampilkan hasil video
+                const videoElement = document.createElement('div');
+                videoElement.classList.add('video');
+                videoElement.innerHTML = `
+                    <h3>${data.data.title}</h3>
+                    <video controls width="100%" src="${data.data.no_watermark}"></video>
+                    <audio controls src="${data.data.music}"></audio> <!-- Menampilkan audio -->
+                `;
+                videosContainer.appendChild(videoElement);
+            } else {
+                alert('Gagal memuat video. Coba lagi.');
+            }
         }
 
-        function displayStickers(stickerUrls, title) {
-            const stickerContainer = document.getElementById('stickerContainer');
-            stickerContainer.innerHTML = ''; // Kosongkan kontainer hasil
-
-            stickerUrls.forEach(url => {
-                const stickerCard = document.createElement('div');
-                stickerCard.className = 'sticker-card';
-
-                const img = document.createElement('img');
-                img.src = url;
-                img.alt = title;
-
-                const saveButton = document.createElement('button');
-                saveButton.textContent = 'Simpan ke Favorit WA';
-                saveButton.onclick = () => saveToWhatsApp(url, title); // Mengubah fungsi untuk menyimpan ke WA
-
-                stickerCard.appendChild(img);
-                stickerCard.appendChild(saveButton);
-                stickerContainer.appendChild(stickerCard);
-            });
-        }
-
-        function saveToWhatsApp(url, title) {
-            const message = `Saya ingin menyimpan stiker ini: ${title}\n${url}`;
-            const waUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`;
-            window.open(waUrl, '_blank'); // Membuka WhatsApp
-        }
-
-        // Membuat bintang berkedip di panel pencarian
+        // Membuat bintang berkedip
         function createStars() {
-            const numStars = 20; // Jumlah bintang yang ingin ditampilkan di panel pencarian
-            const starContainer = document.getElementById('star-container');
+            const numStars = 100; // Jumlah bintang
             for (let i = 0; i < numStars; i++) {
                 const star = document.createElement('div');
                 star.classList.add('star');
-                star.style.top = `${Math.random() * 40}px`; // Bintang berada di atas panel
-                star.style.left = `${Math.random() * 100}%`; // Bintang tersebar dari kiri ke kanan
+                // Mengatur posisi bintang agar tidak menghalangi area video
+                star.style.top = `${Math.random() * (window.innerHeight - 200)}px`; // Bintang tidak akan muncul di area video
+                star.style.left = `${Math.random() * window.innerWidth}px`;
                 star.style.animationDuration = `${Math.random() * 3 + 2}s`; // Durasi animasi bervariasi
-                starContainer.appendChild(star);
+                document.body.appendChild(star);
             }
         }
 
