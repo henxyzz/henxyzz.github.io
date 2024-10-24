@@ -131,10 +131,33 @@
             }
         }
         /* Animasi mengetik */
-        .typing {
+        .typing-indicator {
             display: none;
-            font-style: italic;
+            font-size: 0.9em;
             color: #bbb;
+            text-align: center; /* Center text */
+            margin: 5px 0;
+            position: absolute;
+            bottom: 50px; /* Jarak dari footer */
+            left: 50%;
+            transform: translateX(-50%); /* Center horizontally */
+        }
+        .dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            margin: 0 2px;
+            border-radius: 50%;
+            background-color: #007BFF;
+            animation: bounce 1s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
         }
     </style>
 </head>
@@ -142,7 +165,12 @@
     <div id="chat-container">
         <div id="footer">Siluman AI🗿</div> <!-- Footer ditambahkan di sini -->
         <div id="messages"></div>
-        <div class="typing" id="typingIndicator">AI sedang mengetik...</div> <!-- Indikator mengetik -->
+        <div class="typing-indicator" id="typingIndicator">
+            <span>AI sedang mengetik</span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div> <!-- Indikator mengetik -->
         <div id="input-container">
             <input type="text" id="message-input" placeholder="Ketik pesan...">
             <button id="send-button">Kirim</button>
