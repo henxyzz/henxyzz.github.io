@@ -6,22 +6,73 @@
     <meta name="description" content="Cari video menarik di YouTube dengan pencarian mudah. Temukan video terbaru dan terpopuler.">
     <meta property="og:title" content="YT Search - Cari Video YouTube">
     <meta property="og:description" content="Temukan video menarik dan terbaru di YouTube.">
-    <meta property="og:image" content="URL_THUMBNAIL_DEFAULT.jpg"> <!-- Ganti dengan URL thumbnail default -->
-    <meta property="og:url" content="URL_HALAMAN_YANG_DIBAGIKAN"> <!-- Ganti dengan URL halaman Anda -->
+    <meta property="og:image" content="https://www.wearediagram.com/hubfs/YouTube_Search.jpg"> <!-- Ganti dengan URL thumbnail default -->
+    <meta property="og:url" content="henxyzz.github.io/Search/ytsearch.html"> <!-- Ganti dengan URL halaman Anda -->
     <meta property="og:type" content="website">
     <title>YT Search</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #1e1e1e; /* Warna latar belakang gelap */
+            font-family: 'Montserrat', Arial, sans-serif;
+            background-color: #0f0f0f; /* Warna latar belakang gelap */
             color: #fff; /* Warna teks putih */
             margin: 0;
             padding: 20px;
         }
         h1 {
             text-align: center;
-            color: #4caf50; /* Warna judul */
+            color: #00c3ff; /* Warna judul biru */
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+        .search-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        #searchQuery {
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            border-radius: 20px 0 0 20px;
+            border: none;
+            background-color: #1a1a1a;
+            color: #fff;
+            outline: none;
+            width: 300px;
+            transition: width 0.3s ease;
+        }
+        #searchQuery:focus {
+            width: 400px;
+        }
+        #searchButton {
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            border-radius: 0 20px 20px 0;
+            border: none;
+            background-color: #00c3ff;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        #searchButton:hover {
+            background-color: #00a0cc;
+        }
+        #searchButton.loading {
+            background-color: #00a0cc;
+            pointer-events: none;
+            animation: pulse 1s infinite;
+        }
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
         }
         .video-container {
             display: flex;
@@ -38,6 +89,7 @@
         }
         .video-card:hover {
             transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 255, 255, 0.2);
         }
         .video-thumbnail img {
             width: 100%;
@@ -49,13 +101,14 @@
         .video-info h3 {
             margin: 0;
             font-size: 1.2em;
+            color: #00c3ff;
         }
         .video-info p {
             font-size: 0.9em;
             color: #bbb; /* Warna teks deskripsi */
         }
         .video-info a {
-            color: #4caf50; /* Warna link */
+            color: #00c3ff; /* Warna link */
             text-decoration: none;
         }
         .watermark {
@@ -65,20 +118,36 @@
             color: rgba(255, 255, 255, 0.5);
             font-size: 12px;
         }
+        .copyright {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 12px;
+            color: #bbb; /* Warna teks copyright */
+        }
+        .quality-selection {
+            display: none;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
 
     <h1>Pencarian Video YouTube</h1>
+    <div class="search-container">
+        <input type="text" id="searchQuery" placeholder="Masukan kata kunci" />
+        <button id="searchButton">🔍</button>
+    </div>
     <div class="video-container" id="videoResults"></div>
 
+    <div class="copyright">Copyright by Henz</div>
     <div class="watermark">All rights reserved</div>
 
     <script>
-        const apiUrl = 'https://api.agatz.xyz/api/ytsearch?message=';
+        const apiUrlSearch = 'https://api.agatz.xyz/api/ytsearch?message=';
+        const apiUrlDownload = 'https://api.agatz.xyz/api/ytmp4?url=';
 
         async function fetchVideos(query) {
-            const response = await fetch(apiUrl + encodeURIComponent(query));
+            const response = await fetch(apiUrlSearch + encodeURIComponent(query));
             const data = await response.json();
             return data.data;
         }
@@ -100,15 +169,52 @@
                         <p>Dari: <a href="${video.author.url}" target="_blank">${video.author.name}</a></p>
                         <p><strong>Durasi:</strong> ${video.timestamp}</p>
                         <p><strong>Ditonton:</strong> ${video.views} kali</p>
-                        <a href="Downloader/ytmp4downloader.html?url=${encodeURIComponent(video.url)}" target="_blank">Unduh</a>
+                        <button onclick="downloadVideo('${video.url}', '${video.id}')">Unduh</button>
+                        <div class="quality-selection" id="quality-${video.id}">
+                            <strong>Pilih Kualitas:</strong>
+                            <select onchange="startDownload('${video.url}', this.value)">
+                                <option value="">-- Pilih Kualitas --</option>
+                                <option value="144">144p</option>
+                                <option value="240">240p</option>
+                                <option value="360">360p</option>
+                                <option value="720">720p</option>
+                                <option value="1080">1080p</option>
+                            </select>
+                        </div>
                     </div>
                 `;
                 videoContainer.appendChild(card);
             });
         }
 
-        // Ganti 'Angkasa' dengan kata kunci pencarian yang diinginkan
-        fetchVideos('Angkasa').then(displayVideos);
+        function downloadVideo(url, id) {
+            const qualitySelection = document.getElementById(`quality-${id}`);
+            qualitySelection.style.display = 'block';
+        }
+
+        async function startDownload(url, quality) {
+            if (quality) {
+                const response = await fetch(apiUrlDownload + encodeURIComponent(url));
+                const data = await response.json();
+                if (data.data[quality]) {
+                    const downloadUrl = data.data[quality].response.url;
+                    window.open(downloadUrl, '_blank');
+                } else {
+                    alert("Kualitas yang dipilih tidak tersedia.");
+                }
+            } else {
+                alert("Silakan pilih kualitas sebelum mengunduh.");
+            }
+        }
+
+        document.getElementById('searchButton').addEventListener('click', async () => {
+            const query = document.getElementById('searchQuery').value;
+            const searchButton = document.getElementById('searchButton');
+            searchButton.classList.add('loading');
+            const videos = await fetchVideos(query);
+            displayVideos(videos);
+            searchButton.classList.remove('loading');
+        });
     </script>
 </body>
 </html>

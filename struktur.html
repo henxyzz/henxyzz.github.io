@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="✨Web Kelas 8 Fantastic✨">
+
+    <!-- Favicon -->
+    <link rel="icon" href="https://i.imghippo.com/files/Y98Gt1726664221.jpg" type="image/jpeg"> <!-- Ganti dengan URL gambar favicon -->
+
+    <!-- Tag untuk Aplikasi Microsoft -->
+    <meta name="msapplication-TileImage" content="URL_GAMBAR_TILES"> <!-- Ganti dengan URL gambar tile -->
+
+    <!-- Optimasi Media Sosial -->
+    <meta property="og:site_name" content="Pure Surface">
+    <meta property="og:title" content="✨Web Kelas 8 Fantastic✨">
+    <meta property="og:description" content="Website ini adalah cerminan dari semangat dan solidaritas Kelas 8F, tempat kita belajar dan tumbuh bersama.">
+    <meta property="og:image" content="https://i.imghippo.com/files/Y98Gt1726664221.jpg">
+    <meta property="og:url" content="https://8fantasticx.wuaze.com">
+    <meta property="og:type" content="website">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="300">
+    <meta property="og:image:height" content="300">
+
+    <!-- Twitter Card -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="✨Struktur dan Web Kelas 8 Fantastic✨">
+    <meta property="twitter:description" content="Website ini adalah cerminan dari semangat dan solidaritas Kelas 8F, tempat kita belajar dan tumbuh bersama.">
+    <meta property="twitter:image" content="https://i.imghippo.com/files/Y98Gt1726664221.jpg">
+
+    <title>✨Struktur Kelas 8 Fantastic✨</title>
+    <style>
+        /* Animasi dan styling */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideDown {
+            0% {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes footerSlideUp {
+            0% {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        body {
+            background-color: #1a1a2e; /* Warna gelap */
+            color: #f9f9f9; /* Teks putih */
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        .header {
+            text-align: center;
+            padding: 20px;
+            background-color: #2e2e47; /* Warna ungu gelap */
+            color: #e8c547; /* Warna emas */
+            animation: slideDown 1s ease-in-out;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin: 0;
+            letter-spacing: 2px;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .card {
+            background-color: #3c3c5a; /* Warna ungu */
+            border-radius: 10px;
+            margin: 10px;
+            padding: 20px;
+            width: 250px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.3s ease;
+            animation: fadeIn 1.2s forwards;
+            animation-delay: calc(0.2s * var(--card-index));
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .card img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 10px;
+            animation: fadeIn 1s ease-in-out;
+            transition: transform 0.3s;
+        }
+
+        .card img:hover {
+            transform: scale(1.1);
+        }
+
+        .card h2 {
+            margin: 10px 0;
+            font-size: 1.2em;
+            color: #e8c547; /* Warna emas */
+            animation: fadeIn 1.2s ease-in-out;
+        }
+
+        .card p {
+            font-size: 1em;
+            color: #c5cae9;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .footer {
+            background-color: #2e2e47; /* Warna ungu gelap */
+            text-align: center;
+            padding: 30px;
+            margin-top: 20px;
+            color: #e8c547; /* Warna emas */
+            border-top: 2px solid #e8c547; /* Warna emas */
+            animation: footerSlideUp 1.5s ease-in-out;
+            box-shadow: 0 -5px 15px rgba(0, 230, 118, 0.2);
+        }
+
+        .footer p {
+            font-size: 1.1em;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        @media screen and (max-width: 768px) {
+            .card {
+                width: 100%;
+                margin: 10px 0;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .card {
+                width: 90%;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+        }
+
+        .social-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .social-button {
+            display: inline-block;
+            background-color: #E1306C; /* Warna tombol */
+            color: white;
+            padding: 4px 10px;
+            margin: 2px 0;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.8em;
+            transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+        }
+
+        .social-button:hover {
+            background-color: #C13584; /* Warna saat hover */
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .social-button:active {
+            transform: scale(0.95);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .contact-info {
+            margin-top: 20px;
+            font-size: 1em;
+            animation: fadeIn 2s ease-in-out;
+            color: #76ff03;
+        }
+
+        .contact-info a {
+            color: #76ff03;
+            text-decoration: none;
+        }
+
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>✨Struktur Kelas 8 Fantastic✨</h1>
+        <p>Kami adalah Kelas dengan solidaritas tinggi dan semangat untuk meraih sukses bersama!</p>
+    </div>
+
+    <div class="container">
+        <div class="card" style="--card-index: 1;">
+            <img src="image/wali.jpg" alt="Foto 1"> <!-- Ganti alt text -->
+            <h2>Kika Eka H.S.Pd</h2>
+            <p>Wali Kelas</p>
+        </div>
+        <div class="card" style="--card-index: 2;">
+            <img src="image/ketua.jpg" alt="Foto 2"> <!-- Ganti alt text -->
+            <h2>Najla</h2>
+            <p>Ketua Kelas</p>
+        </div>
+        <div class="card" style="--card-index: 3;">
+            <img src="image/wakil.jpg" alt="Foto 3"> <!-- Ganti alt text -->
+            <h2>Shafa</h2>
+            <p>Wakil Ketua</p>
+        </div>
+        <div class="card" style="--card-index: 4;">
+            <img src="image/sekretaris.jpg" alt="Foto 4"> <!-- Ganti alt text -->
+            <h2>Bela & Risma</h2>
+            <p>Sekretaris</p>
+        </div>
+        <div class="card" style="--card-index: 5;">
+            <img src="image/bendahara.jpg" alt="Foto 5"> <!-- Ganti alt text -->
+            <h2>Sania & Marsya</h2>
+            <p>Bendahara</p>
+        </div>
+        <div class="card">
+            <img src="image/a1.jpg" alt="Foto 6"> <!-- Ganti alt text -->
+            <h2>Picture 1</h2>
+            <div class="social-container">
+                <a href="https://www.instagram.com/_ahmdsyhbdn" class="social-button" target="_blank">Ahmad - Instagram</a>
+                <a href="https://www.instagram.com/all_lifaaliv" class="social-button" target="_blank">Alifa - Instagram</a>
+                <a href="https://www.instagram.com/aqilalutfiah1" class="social-button" target="_blank">Aqila - Instagram</a>
+                <a href="https://www.instagram.com/siii__vii" class="social-button" target="_blank">Fahri - Instagram</a>
+                <span class="social-button">Fizan</span>
+                <span class="social-button">Hilman</span>
+            </div>
+        </div>
+        <div class="card">
+            <img src="image/a2.jpg" alt="Foto 7"> <!-- Ganti alt text -->
+            <h2>Picture 2</h2>
+            <div class="social-container">
+                <a href="https://www.instagram.com/argarksaa_" class="social-button" target="_blank">Arga - Instagram</a>
+                <a href="https://www.instagram.com/belaakmilaa_.27" class="social-button" target="_blank">Bela - Instagram</a>
+                <a href="https://www.instagram.com/attasqydamar?" class="social-button" target="_blank">Damar - Instagram</a>
+                <a href="https://www.instagram.com/new_zmm1" class="social-button" target="_blank">M.Nizam - Instagram</a>
+            </div>
+        </div>
+        <div class="card">
+            <img src="image/a3.jpg" alt="Foto 8"> <!-- Ganti alt text -->
+            <h2>Picture 3</h2>
+            <div class="social-container">
+                <a href="https://www.instagram.com/lutviahdevi" class="social-button" target="_blank">Devi S.L - Instagram</a>
+                <a href="https://www.instagram.com/rjarchn" class="social-button" target="_blank">Devi S.A - Instagram</a>
+                <a href="https://www.instagram.com/drajat.henhen" class="social-button" target="_blank">Drazat - Instagram</a>
+                <a href="https://www.instagram.com/__yourachazz0" class="social-button" target="_blank">Marsya - Instagram</a>
+                <a href="https://www.instagram.com/mohammad_faizal24" class="social-button" target="_blank">M.Faizal - Instagram</a>
+                <span class="social-button">M.Rizki</span>
+            </div>
+        </div>
+        <div class="card">
+            <img src="image/a4.jpg" alt="Foto 9"> <!-- Ganti alt text -->
+            <h2>Picture 4</h2>
+            <div class="social-container">
+                <a href="https://www.instagram.com/najlaaaaaaaaaa3" class="social-button" target="_blank">Najla - Instagram</a>
+                <a href="https://www.instagram.com/nisaj730" class="social-button" target="_blank">Nisa - Instagram</a>
+                <a href="https://www.instagram.com/aditya_salwa" class="social-button" target="_blank">Salwa - Instagram</a>
+                <a href="https://www.instagram.com/sanianirmala3" class="social-button" target="_blank">Sania - Instagram</a>
+                <a href="https://www.instagram.com/0_sshf4" class="social-button" target="_blank">Shafa - Instagram</a>
+            </div>
+        </div>
+        <div class="card">
+            <img src="image/a5.jpg" alt="Foto 10"> <!-- Ganti alt text -->
+            <h2>Picture 5</h2>
+            <div class="social-container">
+                <a href="https://www.instagram.com/rahmasari1699" class="social-button" target="_blank">Rahma - Instagram</a>
+                <a href="https://www.instagram.com/ikiidaanncok" class="social-button" target="_blank">Riki - Instagram</a>
+                <a href="https://www.instagram.com/sltnnn_31" class="social-button" target="_blank">Sultan - Instagram</a>
+                <a href="https://www.instagram.com/si.ucupzz" class="social-button" target="_blank">Yusuf - Instagram</a>
+                <a href="https://www.instagram.com/sri_ynn04" class="social-button" target="_blank">Sri - Instagram</a>
+                <a href="https://www.instagram.com/rii_00a11" class="social-button" target="_blank">Risma - Instagram</a>
+            </div>
+        </div>
+        <div class="card">
+            <img src="image/a6.jpg" alt="Foto 11"> <!-- Ganti alt text -->
+            <h2>Picture 6</h2>
+            <div class="social-container">
+                <a href="https://www.instagram.com/zforrzia" class="social-button" target="_blank">Zahra - Instagram</a>
+                <a href="https://www.instagram.com/viaaviaaa07" class="social-button" target="_blank">Silvia - Instagram</a>
+                <a href="https://www.instagram.com/sekarnairaa" class="social-button" target="_blank">Sekar - Instagram</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Website ini adalah cerminan dari semangat dan solidaritas <strong>Kelas 8F</strong>, tempat kita belajar dan tumbuh bersama. Kami bangga dengan pencapaian dan kebersamaan kami.</p>
+        <div class="contact-info">
+            <p>Kontak Kami:</p>
+            <p>Nomor Telepon: <a href="tel:6285723701289">6285723701289</a></p>
+            <p>Instagram: <a href="https://www.instagram.com/eight.fantasticc__?igsh=MXd3cDhsemY4emMyeA==" target="_blank">@8Fantastic</a></p>
+        </div>
+    </div>
+
+    <!-- Audio Player untuk memutar musik -->
+    <audio id="welcome-sound" autoplay>
+        <source src="ai_s.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+    <audio id="button-sound">
+        <source src="home.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        // Memastikan suara sambutan diputar hanya sekali saat halaman dimuat
+        window.onload = function() {
+            const welcomeSound = document.getElementById('welcome-sound');
+            welcomeSound.play();
+        };
+
+        document.querySelectorAll('.social-button').forEach(button => {
+            button.addEventListener('click', function() {
+                const buttonSound = document.getElementById('button-sound');
+                buttonSound.currentTime = 0; // Mengatur waktu pemutaran ke awal
+                buttonSound.play();
+            });
+        });
+    </script>
+
+</body>
+</html>
