@@ -124,10 +124,6 @@
             font-size: 12px;
             color: #bbb;
         }
-        .quality-selection {
-            display: none;
-            margin-top: 10px;
-        }
     </style>
 </head>
 <body>
@@ -169,41 +165,21 @@
                         <p>Dari: <a href="${video.author.url}" target="_blank">${video.author.name}</a></p>
                         <p><strong>Durasi:</strong> ${video.timestamp}</p>
                         <p><strong>Ditonton:</strong> ${video.views} kali</p>
-                        <button onclick="downloadVideo('${video.url}', '${video.id}')">Unduh</button>
-                        <div class="quality-selection" id="quality-${video.id}">
-                            <strong>Pilih Kualitas:</strong>
-                            <select onchange="startDownload('${video.url}', this.value)">
-                                <option value="">-- Pilih Kualitas --</option>
-                                <option value="144">144p</option>
-                                <option value="240">240p</option>
-                                <option value="360">360p</option>
-                                <option value="720">720p</option>
-                                <option value="1080">1080p</option>
-                            </select>
-                        </div>
+                        <button onclick="startDownload('${video.url}')">Unduh</button>
                     </div>
                 `;
                 videoContainer.appendChild(card);
             });
         }
 
-        function downloadVideo(url, id) {
-            const qualitySelection = document.getElementById(`quality-${id}`);
-            qualitySelection.style.display = qualitySelection.style.display === 'block' ? 'none' : 'block';
-        }
-
-        async function startDownload(url, quality) {
-            if (quality) {
-                const response = await fetch(apiUrlDownload + encodeURIComponent(url) + '&quality=' + quality);
-                const data = await response.json();
-                if (data.data[quality]) {
-                    const downloadUrl = data.data[quality].response.url;
-                    window.open(downloadUrl, '_blank');
-                } else {
-                    alert("Kualitas yang dipilih tidak tersedia.");
-                }
+        async function startDownload(url) {
+            const response = await fetch(apiUrlDownload + encodeURIComponent(url));
+            const data = await response.json();
+            if (data.data) {
+                const downloadUrl = data.data[0].response.url; // Mengambil URL unduh dari data
+                window.open(downloadUrl, '_blank');
             } else {
-                alert("Silakan pilih kualitas sebelum mengunduh.");
+                alert("Video tidak tersedia untuk diunduh.");
             }
         }
 
