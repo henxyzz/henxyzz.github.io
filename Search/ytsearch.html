@@ -6,22 +6,22 @@
     <meta name="description" content="Cari video menarik di YouTube dengan pencarian mudah. Temukan video terbaru dan terpopuler.">
     <meta property="og:title" content="YT Search - Cari Video YouTube">
     <meta property="og:description" content="Temukan video menarik dan terbaru di YouTube.">
-    <meta property="og:image" content="https://www.wearediagram.com/hubfs/YouTube_Search.jpg"> <!-- Ganti dengan URL thumbnail default -->
-    <meta property="og:url" content="henxyzz.github.io/Search/ytsearch.html"> <!-- Ganti dengan URL halaman Anda -->
+    <meta property="og:image" content="https://www.wearediagram.com/hubfs/YouTube_Search.jpg">
+    <meta property="og:url" content="henxyzz.github.io/Search/ytsearch.html">
     <meta property="og:type" content="website">
     <title>YT Search</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         body {
             font-family: 'Montserrat', Arial, sans-serif;
-            background-color: #0f0f0f; /* Warna latar belakang gelap */
-            color: #fff; /* Warna teks putih */
+            background-color: #0f0f0f;
+            color: #fff;
             margin: 0;
             padding: 20px;
         }
         h1 {
             text-align: center;
-            color: #00c3ff; /* Warna judul biru */
+            color: #00c3ff;
             font-size: 3rem;
             margin-bottom: 20px;
             text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
@@ -80,7 +80,7 @@
             justify-content: space-around;
         }
         .video-card {
-            background-color: #2c2c2c; /* Warna latar belakang kartu video */
+            background-color: #2c2c2c;
             border-radius: 8px;
             overflow: hidden;
             margin: 10px;
@@ -105,10 +105,10 @@
         }
         .video-info p {
             font-size: 0.9em;
-            color: #bbb; /* Warna teks deskripsi */
+            color: #bbb;
         }
         .video-info a {
-            color: #00c3ff; /* Warna link */
+            color: #00c3ff;
             text-decoration: none;
         }
         .watermark {
@@ -122,7 +122,7 @@
             text-align: center;
             margin-top: 20px;
             font-size: 12px;
-            color: #bbb; /* Warna teks copyright */
+            color: #bbb;
         }
         .quality-selection {
             display: none;
@@ -189,12 +189,12 @@
 
         function downloadVideo(url, id) {
             const qualitySelection = document.getElementById(`quality-${id}`);
-            qualitySelection.style.display = 'block';
+            qualitySelection.style.display = qualitySelection.style.display === 'block' ? 'none' : 'block';
         }
 
         async function startDownload(url, quality) {
             if (quality) {
-                const response = await fetch(apiUrlDownload + encodeURIComponent(url));
+                const response = await fetch(apiUrlDownload + encodeURIComponent(url) + '&quality=' + quality);
                 const data = await response.json();
                 if (data.data[quality]) {
                     const downloadUrl = data.data[quality].response.url;
